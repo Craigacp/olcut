@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.PostConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.PostConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -49,7 +49,7 @@ public class PostConfigTest {
 
     @Test
     public void postConfigTest() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("postConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/postConfig.json");
         PostConfigurable p = (PostConfigurable) cm.lookup("post");
         assertEquals("Monkeys",p.one);
         assertEquals("Gorillas",p.two);

@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.MapConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.MapConfigurable;
 import com.oracle.labs.mlrg.olcut.config.PropertySheet;
 
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class MapTest {
 
     @Test
     public void mapTest() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("mapConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/mapConfig.json");
         MapConfigurable m = (MapConfigurable) cm.lookup("mapTest");
         Map<String,String> map = m.map;
         assertEquals("stuff",map.get("things"));

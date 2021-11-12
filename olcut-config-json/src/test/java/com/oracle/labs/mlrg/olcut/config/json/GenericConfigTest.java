@@ -29,10 +29,10 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.ListConfig;
+import com.oracle.labs.mlrg.olcut.config.test.ListConfig;
 import com.oracle.labs.mlrg.olcut.config.PropertyException;
-import com.oracle.labs.mlrg.olcut.config.SetConfig;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.SetConfig;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -55,7 +55,7 @@ public class GenericConfigTest {
 
     @Test
     public void correctListConfig() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("genericConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/genericConfig.json");
         ListConfig s = (ListConfig) cm.lookup("correctListConfig");
 
         assertEquals(4,s.stringList.size(), "StringList has an incorrect number of values");
@@ -80,14 +80,14 @@ public class GenericConfigTest {
     @Test
     public void incorrectListConfig() throws IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("genericConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/genericConfig.json");
             ListConfig l = (ListConfig) cm.lookup("incorrectListConfig");
         });
     }
 
     @Test
     public void correctSetConfig() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("genericConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/genericConfig.json");
         SetConfig s = (SetConfig) cm.lookup("correctSetConfig");
 
         assertEquals( 3,s.stringSet.size(), "StringSet has an incorrect number of values");
@@ -111,7 +111,7 @@ public class GenericConfigTest {
     @Test
     public void incorrectSetConfig() throws IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("genericConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/genericConfig.json");
             SetConfig s = (SetConfig) cm.lookup("incorrectSetConfig");
         });
     }

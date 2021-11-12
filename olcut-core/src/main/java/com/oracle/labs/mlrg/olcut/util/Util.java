@@ -115,9 +115,7 @@ public class Util {
 
         StringBuilder buffer = new StringBuilder();
         buffer.append("0.");
-        for (int i = 0; i < fractionDigits; i++) {
-            buffer.append("0");
-        }
+        buffer.append("0".repeat(Math.max(0, fractionDigits)));
         buffer.append("E00");
 
         String formatter = buffer.toString();

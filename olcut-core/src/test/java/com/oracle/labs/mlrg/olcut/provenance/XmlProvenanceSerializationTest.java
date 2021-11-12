@@ -33,10 +33,8 @@ import com.oracle.labs.mlrg.olcut.provenance.ProvenanceConversionTest.SimpleObje
 import com.oracle.labs.mlrg.olcut.provenance.io.ObjectMarshalledProvenance;
 import com.oracle.labs.mlrg.olcut.provenance.io.ProvenanceSerializationException;
 import com.oracle.labs.mlrg.olcut.provenance.io.XMLProvenanceSerialization;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.SplittableRandom;
 

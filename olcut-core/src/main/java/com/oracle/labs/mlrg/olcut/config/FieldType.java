@@ -118,7 +118,7 @@ public enum FieldType {
     public final static EnumSet<FieldType> configurableTypes = EnumSet.of(CONFIGURABLE,CONFIGURABLE_ARRAY);
 
     FieldType(Class<?>... types) {
-        this.types = Collections.unmodifiableList(Arrays.asList(types));
+        this.types = List.of(types);
     }
 
     static {

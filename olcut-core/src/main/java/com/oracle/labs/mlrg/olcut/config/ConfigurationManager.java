@@ -1398,8 +1398,7 @@ public class ConfigurationManager implements Closeable {
             configurationNameMap.put(ret, instanceName);
         }
 
-        if (ret instanceof Startable) {
-            Startable stret = (Startable) ret;
+        if (ret instanceof Startable stret) {
             Thread t = new Thread(stret);
             t.setName(instanceName + "_thread");
             stret.setThread(t);
@@ -1805,11 +1804,9 @@ public class ConfigurationManager implements Closeable {
      */
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof ConfigurationManager)) {
+        if(!(obj instanceof ConfigurationManager cm)) {
             return false;
         }
-
-        ConfigurationManager cm = (ConfigurationManager) obj;
 
         Collection<String> setA = new HashSet<>(getComponentNames());
         Collection<String> setB = new HashSet<>(cm.getComponentNames());

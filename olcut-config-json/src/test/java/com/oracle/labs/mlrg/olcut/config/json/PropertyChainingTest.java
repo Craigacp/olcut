@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,7 +50,7 @@ public class PropertyChainingTest {
 
     @Test
     public void chainLoading() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("propertyChainingConfigA.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/propertyChainingConfigA.json");
         String stringA = cm.getGlobalProperty("stringA");
         String stringB = cm.getGlobalProperty("stringB");
         String stringC = cm.getGlobalProperty("stringC");
@@ -67,7 +67,7 @@ public class PropertyChainingTest {
 
     @Test
     public void overlay() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("propertyChainingConfigA.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/propertyChainingConfigA.json");
         String globalA = cm.getGlobalProperty("a");
         String globalB = cm.getGlobalProperty("b");
         String globalC = cm.getGlobalProperty("c");

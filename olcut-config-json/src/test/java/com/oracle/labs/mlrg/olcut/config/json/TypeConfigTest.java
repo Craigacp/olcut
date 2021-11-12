@@ -28,10 +28,10 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.BasicConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.BasicConfigurable;
 import com.oracle.labs.mlrg.olcut.config.Configurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.ListTypeConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.ListTypeConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,7 +52,7 @@ public class TypeConfigTest {
 
     @Test
     public void defaultValues() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
         BasicConfigurable bc1 = (BasicConfigurable) cm1.lookup("default");
         assertEquals(bc1.s, "default");
         assertEquals(bc1.i, 16);
@@ -65,7 +65,7 @@ public class TypeConfigTest {
 
     @Test
     public void configuredTypes() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
         BasicConfigurable bc1 = (BasicConfigurable) cm1.lookup("a");
         assertEquals(bc1.s, "one");
         assertEquals(bc1.i, 2);
@@ -78,7 +78,7 @@ public class TypeConfigTest {
     
     @Test
     public void listTypes() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
         ListTypeConfigurable lc1 = (ListTypeConfigurable) cm1.lookup("l1");
         Configurable[] cl = lc1.getList();
         BasicConfigurable bc1 = (BasicConfigurable) cl[0];

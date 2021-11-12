@@ -28,7 +28,7 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.BasicConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.BasicConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationData;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.property.Property;
@@ -55,7 +55,7 @@ public class RemoveTest {
 
     @Test
     public void testInstantiatedRemove() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("basicConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/basicConfig.json");
         BasicConfigurable bc = (BasicConfigurable) cm.lookup("a");
         boolean removed = cm.removeConfigurable("a");
         assertTrue(removed);
@@ -67,7 +67,7 @@ public class RemoveTest {
 
     @Test
     public void testUninstantiatedRemove() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("basicConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/basicConfig.json");
         boolean removed = cm.removeConfigurable("a");
         assertTrue(removed);
         try{

@@ -144,14 +144,14 @@ public class XMLConfigWriter implements ConfigWriter {
                         writer.writeStartElement(ConfigLoader.PROPERTYLIST);
                         writer.writeAttribute(ConfigLoader.NAME, key);
                         writer.writeCharacters(System.lineSeparator());
-                        for (SimpleProperty s : ((ListProperty) value).getSimpleList()) {
+                        for (SimpleProperty s : ((ListProperty) value).simpleList()) {
                             writer.writeCharacters("\t\t");
                             writer.writeStartElement(ConfigLoader.ITEM);
-                            writer.writeCharacters(s.getValue());
+                            writer.writeCharacters(s.value());
                             writer.writeEndElement();
                             writer.writeCharacters(System.lineSeparator());
                         }
-                        for (Class<?> c : ((ListProperty)value).getClassList()) {
+                        for (Class<?> c : ((ListProperty)value).classList()) {
                             writer.writeCharacters("\t\t");
                             writer.writeStartElement(ConfigLoader.TYPE);
                             writer.writeCharacters(c.getName());
@@ -168,11 +168,11 @@ public class XMLConfigWriter implements ConfigWriter {
                         writer.writeStartElement(ConfigLoader.PROPERTYMAP);
                         writer.writeAttribute(ConfigLoader.NAME, key);
                         writer.writeCharacters(System.lineSeparator());
-                        for (Map.Entry<String, SimpleProperty> e : ((MapProperty) value).getMap().entrySet()) {
+                        for (Map.Entry<String, SimpleProperty> e : ((MapProperty) value).map().entrySet()) {
                             writer.writeCharacters("\t\t");
                             writer.writeEmptyElement(ConfigLoader.ENTRY);
                             writer.writeAttribute(ConfigLoader.KEY, e.getKey());
-                            writer.writeAttribute(ConfigLoader.VALUE, e.getValue().getValue());
+                            writer.writeAttribute(ConfigLoader.VALUE, e.getValue().value());
                             writer.writeCharacters(System.lineSeparator());
                         }
                         writer.writeCharacters("\t");

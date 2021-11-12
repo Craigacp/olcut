@@ -34,4 +34,4 @@ package com.oracle.labs.mlrg.olcut.provenance.io;
  * Will be sealed to {@link FlatMarshalledProvenance} and {@link ObjectMarshalledProvenance}
  * one day.
  */
-public interface MarshalledProvenance { }
+public sealed interface MarshalledProvenance permits FlatMarshalledProvenance, ObjectMarshalledProvenance { }

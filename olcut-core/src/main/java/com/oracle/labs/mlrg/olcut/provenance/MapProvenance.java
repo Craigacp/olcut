@@ -41,56 +41,27 @@ import java.util.Objects;
  * A Provenance which is a map from {@link String} to other {@link Provenance}
  * objects.
  */
-public final class MapProvenance<T extends Provenance> implements Provenance, Iterable<Pair<String,T>> {
+public final record MapProvenance<T extends Provenance>(Map<String,T> map) implements Provenance, Iterable<Pair<String,T>> {
     private static final long serialVersionUID = 1L;
-
-    private final Map<String,T> map;
-
     /**
      * Creates a MapProvenance from a map. The map is defensively copied
      * and immutable.
      * @param map The map of provenances.
      */
     public MapProvenance(Map<String,T> map) {
-        this.map = Collections.unmodifiableMap(new HashMap<>(map));
+        this.map = Map.copyOf(map);
     }
 
     /**
      * Creates an empty MapProvenance.
      */
     public MapProvenance() {
-        this.map = Collections.emptyMap();
-    }
-
-    /**
-     * An unmodifiable view on the provenance map.
-     * @return The provenance map.
-     */
-    public Map<String,T> getMap() {
-        return map;
+        this(Collections.emptyMap());
     }
 
     @Override
     public Iterator<Pair<String, T>> iterator() {
         return new MapProvenanceIterator<>(map.entrySet().iterator());
-    }
-
-    @Override
-    public String toString() {
-        return map.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MapProvenance)) return false;
-        MapProvenance<?> that = (MapProvenance<?>) o;
-        return map.equals(that.map);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(map);
     }
 
     /**

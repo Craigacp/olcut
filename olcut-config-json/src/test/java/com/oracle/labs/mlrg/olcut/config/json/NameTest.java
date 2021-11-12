@@ -28,10 +28,10 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.ArrayStringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.ArrayStringConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.NamedConfigurable;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.NamedConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -53,7 +53,7 @@ public class NameTest {
 
     @Test
     public void configurableNameTest() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("componentListConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/componentListConfig.json");
         ArrayStringConfigurable lc = (ArrayStringConfigurable) cm.lookup("stringconfigurablearray");
         assertEquals("stringconfigurablearray",lc.getName());
         StringConfigurable[] l = lc.getArray();
@@ -68,7 +68,7 @@ public class NameTest {
 
     @Test
     public void componentNameTest() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("nameConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/nameConfig.json");
         NamedConfigurable nc = (NamedConfigurable) cm.lookup("monkeys");
         assertEquals("monkeys",nc.getName());
     }

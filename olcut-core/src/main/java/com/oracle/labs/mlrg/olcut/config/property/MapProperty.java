@@ -35,17 +35,11 @@ import java.util.Map;
 /**
  * A MapProperty is a container for a Map from String to Property.
  */
-public final class MapProperty implements Property {
+public final record MapProperty(Map<String,SimpleProperty> map) implements Property {
     private static final long serialVersionUID = 1L;
-
-    private final Map<String,SimpleProperty> map;
 
     public MapProperty(Map<String,SimpleProperty> map) {
         this.map = Collections.unmodifiableMap(map);
-    }
-
-    public Map<String,SimpleProperty> getMap() {
-        return map;
     }
 
     @Override
@@ -57,24 +51,6 @@ public final class MapProperty implements Property {
         }
 
         return new MapProperty(output);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MapProperty)) return false;
-        MapProperty that = (MapProperty) o;
-        return getMap().equals(that.getMap());
-    }
-
-    @Override
-    public int hashCode() {
-        return map.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return map.toString();
     }
 
     public static MapProperty createFromStringMap(Map<String,String> input) {

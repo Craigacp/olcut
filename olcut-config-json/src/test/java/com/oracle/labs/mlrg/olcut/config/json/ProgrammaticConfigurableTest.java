@@ -28,21 +28,19 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.BasicConfigurable;
-import com.oracle.labs.mlrg.olcut.config.Configurable;
+import com.oracle.labs.mlrg.olcut.config.test.BasicConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationData;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.property.Property;
 import com.oracle.labs.mlrg.olcut.config.PropertyException;
 import com.oracle.labs.mlrg.olcut.config.property.SimpleProperty;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
 import com.oracle.labs.mlrg.olcut.util.LabsLogFormatter;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -70,7 +68,7 @@ public class ProgrammaticConfigurableTest {
      */
     @Test
     public void addDefaultStringConfigurable() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.addConfiguration(StringConfigurable.class, "c");
         StringConfigurable sc = (StringConfigurable) cm.lookup("c");
         assertEquals("", sc.one);
@@ -83,7 +81,7 @@ public class ProgrammaticConfigurableTest {
      */
     @Test
     public void addStringConfigurable() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         Map<String,Property> m = new HashMap<>();
         for(String s : new String[] {"one", "two", "three"}) {
             m.put(s, new SimpleProperty(s));
@@ -101,7 +99,7 @@ public class ProgrammaticConfigurableTest {
      */
     @Test
     public void addPartialStringConfigurable() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         Map<String,Property> m = new HashMap<>();
         for(String s : new String[] {"one"}) {
             m.put(s, new SimpleProperty(s));
@@ -128,7 +126,7 @@ public class ProgrammaticConfigurableTest {
     @Test
     public void addConfigurableWithBadProperty() throws IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("basicConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/basicConfig.json");
             Map<String,Property> m = new HashMap<>();
             m.put("s", new SimpleProperty("one"));
             m.put("i", new SimpleProperty("two"));
@@ -146,7 +144,7 @@ public class ProgrammaticConfigurableTest {
      */
     @Test
     public void addAlreadyNamedStringConfigurable() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         Map<String,Property> m = new HashMap<>();
         for(String s : new String[] {"one", "two", "three"}) {
             m.put(s, new SimpleProperty(s));
@@ -165,7 +163,7 @@ public class ProgrammaticConfigurableTest {
     @Test
     public void addAlreadyNamedAndInstatiatedStringConfigurable() throws IOException {
         assertThrows(IllegalArgumentException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
             StringConfigurable sc = (StringConfigurable) cm.lookup("a");
             Map<String,Property> m = new HashMap<>();
             for(String s : new String[] {"one", "two", "three"}) {
@@ -181,7 +179,7 @@ public class ProgrammaticConfigurableTest {
 
         //
         // Add a component.
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         Map<String, Property> m = new HashMap<>();
         for(String s : new String[]{"one", "two", "three"}) {
             m.put(s, new SimpleProperty(s));

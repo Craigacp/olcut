@@ -50,7 +50,7 @@ public final class MapMarshalledProvenance implements FlatMarshalledProvenance, 
      * @param map The map.
      */
     public MapMarshalledProvenance(Map<String, FlatMarshalledProvenance> map) {
-        this.map = Collections.unmodifiableMap(new HashMap<>(map));
+        this.map = Map.copyOf(map);
     }
 
     /**
@@ -81,8 +81,7 @@ public final class MapMarshalledProvenance implements FlatMarshalledProvenance, 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MapMarshalledProvenance)) return false;
-        MapMarshalledProvenance that = (MapMarshalledProvenance) o;
+        if (!(o instanceof MapMarshalledProvenance that)) return false;
         return map.equals(that.map);
     }
 

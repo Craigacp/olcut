@@ -45,21 +45,21 @@ public class DuplicatePropertyTest {
     @Test
     public void duplicatePropertyMap() {
         assertThrows(ConfigLoaderException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("duplicatePropertyMapConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/duplicatePropertyMapConfig.json");
         }, "Should have thrown exception on loading");
     }
 
     @Test
     public void duplicatePropertyList() {
         assertThrows(ConfigLoaderException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("duplicatePropertyListConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/duplicatePropertyListConfig.json");
         }, "Should have thrown exception on loading");
     }
 
     @Test
     public void duplicateProperty() {
         assertThrows(ConfigLoaderException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("duplicatePropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/duplicatePropertyConfig.json");
         }, "Should have thrown exception on loading");
     }
 }

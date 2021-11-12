@@ -63,7 +63,7 @@ public final class DescribeConfigurable {
     /**
      * The description column headers.
      */
-    public static final List<String> HEADER = Collections.unmodifiableList(Arrays.asList("Field Name", "Type", "Mandatory", "Redact", "Default", "Description"));
+    public static final List<String> HEADER = List.of("Field Name", "Type", "Mandatory", "Redact", "Default", "Description");
 
     /**
      * All the configuration relevant field information.
@@ -412,19 +412,13 @@ public final class DescribeConfigurable {
         for (Map.Entry<String, FieldInfo> e : map.entrySet()) {
             FieldInfo fi = e.getValue();
             switch (fi.type) {
-                case NORMAL:
-                case ENUM:
-                    properties.put(e.getKey(), new SimpleProperty(generateDefaultValue(fi)));
-                    break;
-                case LIST:
-                case ENUM_LIST:
-                    properties.put(e.getKey(), new ListProperty(Collections.singletonList(new SimpleProperty(fi.className + "-instance"))));
-                    break;
-                case MAP:
+                case NORMAL, ENUM -> properties.put(e.getKey(), new SimpleProperty(generateDefaultValue(fi)));
+                case LIST, ENUM_LIST -> properties.put(e.getKey(), new ListProperty(Collections.singletonList(new SimpleProperty(fi.className + "-instance"))));
+                case MAP -> {
                     Map<String, SimpleProperty> newMap = new HashMap<>();
                     newMap.put("mapKey", new SimpleProperty(fi.genericMapValueClass + "-instance"));
                     properties.put(e.getKey(), new MapProperty(newMap));
-                    break;
+                }
             }
         }
 

@@ -116,26 +116,26 @@ public class EdnConfigWriter implements ConfigWriter {
         if(p instanceof MapProperty) {
             // map configurable field
             Map<Keyword, String> mRes = new HashMap<>();
-            for(Map.Entry<String, SimpleProperty> e: ((MapProperty) p).getMap().entrySet()) {
+            for(Map.Entry<String, SimpleProperty> e: ((MapProperty) p).map().entrySet()) {
                 if(e.getKey()==null) {
                     throw new ConfigWriterException(new IllegalArgumentException("Can't write a map with null keys" + p.toString()));
                 }
                 if(e.getValue()==null) {
                     throw new ConfigWriterException(new IllegalArgumentException("Can't write a map with null values: " + p.toString()));
                 }
-                mRes.put(Keyword.newKeyword(e.getKey()), e.getValue().getValue());
+                mRes.put(Keyword.newKeyword(e.getKey()), e.getValue().value());
             }
             res = mRes;
         } else if(p instanceof ListProperty) {
             // list configurable field
             List<Object> lRes = new ArrayList<>();
-            for (SimpleProperty s : ((ListProperty)p).getSimpleList()) {
+            for (SimpleProperty s : ((ListProperty)p).simpleList()) {
                 if(s==null) {
                     throw new ConfigWriterException(new IllegalArgumentException("Can't write a list with null values: " + p.toString()));
                 }
-                lRes.add(s.getValue());
+                lRes.add(s.value());
             }
-            for (Class<?> c : ((ListProperty) p).getClassList()) {
+            for (Class<?> c : ((ListProperty) p).classList()) {
                 if(c==null) {
                     throw new ConfigWriterException(new IllegalArgumentException("Can't write a list with null values: " + p.toString()));
                 }
@@ -143,7 +143,7 @@ public class EdnConfigWriter implements ConfigWriter {
             }
             res = lRes;
         } else if(p instanceof SimpleProperty) {
-            res = ((SimpleProperty) p).getValue();
+            res = ((SimpleProperty) p).value();
         } else {
             throw new ConfigWriterException(new IllegalArgumentException("Unexpected type for property value " + p.getClass().toString() + " with value " + p));
         }

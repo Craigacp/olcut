@@ -32,6 +32,8 @@ package com.oracle.labs.mlrg.olcut.util;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -46,7 +48,7 @@ public class SortUtilTest {
     @Test
     public void testArgsort() {
         List<Double> input = Arrays.asList(0.1, 0.4, 0.35, 0.8);
-        assertArrayEquals(new int[]{0, 2, 1, 3}, SortUtil.argsort(input,true), "List input not sorted ascending correctly.");
+        Assertions.assertArrayEquals(new int[]{0, 2, 1, 3}, SortUtil.argsort(input,true), "List input not sorted ascending correctly.");
         assertArrayEquals(new int[]{3,1,2,0}, SortUtil.argsort(input,false), "List input not sorted descending correctly.");
         input = Arrays.asList(0.1, 0.35, 0.4, 0.35, 0.8, 0.8);
         assertArrayEquals(new int[]{0, 1, 3, 2, 4, 5}, SortUtil.argsort(input,true), "List input with duplicates not sorted ascending correctly.");

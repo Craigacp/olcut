@@ -50,9 +50,7 @@ public final class StringUtil {
     public static String pad(int padding) {
         if (padding > 0) {
             StringBuilder sb = new StringBuilder(padding);
-            for (int i = 0; i < padding; i++) {
-                sb.append(' ');
-            }
+            sb.append(" ".repeat(padding));
             return sb.toString();
         } else {
             return "";

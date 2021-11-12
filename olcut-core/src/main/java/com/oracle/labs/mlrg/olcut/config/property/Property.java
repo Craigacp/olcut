@@ -39,6 +39,6 @@ import java.io.Serializable;
  * by {@link SimpleProperty}, {@link ListProperty}, and {@link MapProperty}.
  * Other subclasses will not be recognised by the configuration processing machinery.
  */
-public interface Property extends Serializable {
+public sealed interface Property extends Serializable permits SimpleProperty, ListProperty, MapProperty {
     public Property copy();
 }

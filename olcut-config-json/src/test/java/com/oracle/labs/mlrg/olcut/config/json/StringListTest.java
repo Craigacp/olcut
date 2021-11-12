@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.StringListConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringListConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -49,7 +49,7 @@ public class StringListTest {
 
     @Test
     public void getStrings() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringListConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringListConfig.json");
         StringListConfigurable slc = (StringListConfigurable) cm.lookup(
                 "listTest");
         assertEquals("a", slc.strings.get(0));

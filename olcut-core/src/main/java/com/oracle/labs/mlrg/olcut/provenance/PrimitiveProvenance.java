@@ -36,7 +36,23 @@ package com.oracle.labs.mlrg.olcut.provenance;
  * When adding a new PrimitiveProvenance the ProvenanceUtil and SimpleMarshalledProvenance
  * classes must also be updated to be taught about the new type.
  */
-public interface PrimitiveProvenance<T> extends Provenance {
+public sealed interface PrimitiveProvenance<T> extends Provenance
+        permits com.oracle.labs.mlrg.olcut.provenance.primitives.BooleanProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.ByteProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.CharProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.DateProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.DateTimeProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.DoubleProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.EnumProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.FileProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.FloatProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.HashProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.IntProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.LongProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.ShortProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.StringProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.TimeProvenance,
+        com.oracle.labs.mlrg.olcut.provenance.primitives.URLProvenance {
 
     /**
      * Gets the key associated with this provenance,
@@ -44,12 +60,12 @@ public interface PrimitiveProvenance<T> extends Provenance {
      * object.
      * @return The key.
      */
-    public String getKey();
+    public String key();
 
     /**
      * Gets the value of this provenance.
      * @return The value.
      */
-    public T getValue();
+    public T value();
 
 }

@@ -68,7 +68,7 @@ import java.util.logging.Logger;
  * the validation checks in {@link ConfigurationManager#validateOptions}.
  */
 public interface Options {
-    public static final List<String> header = Collections.unmodifiableList(Arrays.asList("Char","Long Name","Type","Default","Usage"));
+    public static final List<String> header = List.of("Char", "Long Name", "Type", "Default", "Usage");
 
     /**
      * Gets a possibly multi line description of this Options subclass.
@@ -214,8 +214,7 @@ public interface Options {
             return "enum - " + getEnumConstantString(enumClazz);
         } else if (clazz == EnumSet.class) {
             Type type = f.getGenericType();
-            if (type instanceof ParameterizedType) {
-                ParameterizedType typeName = (ParameterizedType) type;
+            if (type instanceof ParameterizedType typeName) {
                 // Should only have a single type parameter
                 Type enumType = typeName.getActualTypeArguments()[0];
                 try {

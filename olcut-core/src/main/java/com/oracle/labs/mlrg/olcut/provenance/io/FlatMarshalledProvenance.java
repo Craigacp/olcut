@@ -34,4 +34,5 @@ package com.oracle.labs.mlrg.olcut.provenance.io;
  * <p>
  * Will be sealed to those types one day.
  */
-public interface FlatMarshalledProvenance extends MarshalledProvenance { }
+public sealed interface FlatMarshalledProvenance extends MarshalledProvenance
+        permits ListMarshalledProvenance, MapMarshalledProvenance, SimpleMarshalledProvenance { }

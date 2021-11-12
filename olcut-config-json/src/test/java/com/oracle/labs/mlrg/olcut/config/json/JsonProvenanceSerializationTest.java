@@ -61,7 +61,7 @@ public class JsonProvenanceSerializationTest {
 
     @Test
     public void marshallingTest() throws ProvenanceSerializationException {
-        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/provenance/example-provenance-config.xml");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json//com/oracle/labs/mlrg/olcut/provenance/example-provenance-config.xml");
         ExampleProvenancableConfigurable e = (ExampleProvenancableConfigurable) cm1.lookup("example-config");
         assertNotNull(e, "Failed to load example config");
 

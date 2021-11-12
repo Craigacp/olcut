@@ -28,7 +28,7 @@
 
 package com.oracle.labs.mlrg.olcut.provenance;
 
-import com.oracle.labs.mlrg.olcut.config.AllFieldsConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.AllFieldsConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationData;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertySheet;
@@ -203,8 +203,7 @@ public class ProvenanceConversionTest {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof SimpleObjectProvenance)) return false;
-            SimpleObjectProvenance pairs = (SimpleObjectProvenance) o;
+            if (!(o instanceof SimpleObjectProvenance pairs)) return false;
             return prov.equals(pairs.prov);
         }
 

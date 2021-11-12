@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +19,7 @@ import com.oracle.labs.mlrg.olcut.provenance.io.ObjectMarshalledProvenance;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.oracle.labs.mlrg.olcut.config.AllFieldsConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.AllFieldsConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertySheet;
 import com.oracle.labs.mlrg.olcut.util.IOUtil;

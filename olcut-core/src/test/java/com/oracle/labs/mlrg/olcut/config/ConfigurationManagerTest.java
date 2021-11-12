@@ -28,12 +28,12 @@
 
 package com.oracle.labs.mlrg.olcut.config;
 
-import com.oracle.labs.mlrg.olcut.config.test.Ape;
 import com.oracle.labs.mlrg.olcut.config.test.Barbary;
 import com.oracle.labs.mlrg.olcut.config.test.Chimp;
 import com.oracle.labs.mlrg.olcut.config.test.Gorilla;
 import com.oracle.labs.mlrg.olcut.config.test.Monkey;
 import com.oracle.labs.mlrg.olcut.config.test.Orangutan;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -72,7 +72,7 @@ public class ConfigurationManagerTest {
 
     @Test
     public void testSingletonMultipleClasses() {
-        assertThrows(PropertyException.class, () -> {singletonCM.lookupSingleton(Gorilla.class, false);},
+        Assertions.assertThrows(PropertyException.class, () -> {singletonCM.lookupSingleton(Gorilla.class, false);},
                 "Config has multiple Gorillas but no exception was thrown");
         assertThrows(PropertyException.class, () -> {singletonCM.lookupSingleton(Gorilla.class, true);},
                 "Config has multiple Gorillas but no exception was thrown");

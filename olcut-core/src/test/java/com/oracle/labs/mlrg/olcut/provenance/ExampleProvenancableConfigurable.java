@@ -77,8 +77,7 @@ public final class ExampleProvenancableConfigurable implements Configurable, Pro
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ExampleProvenancableConfigurable)) return false;
-        ExampleProvenancableConfigurable that = (ExampleProvenancableConfigurable) o;
+        if (!(o instanceof ExampleProvenancableConfigurable that)) return false;
         return Double.compare(that.doubleField, doubleField) == 0 &&
                 Arrays.equals(intArrayField, that.intArrayField) &&
                 examples.equals(that.examples) &&
@@ -125,8 +124,8 @@ public final class ExampleProvenancableConfigurable implements Configurable, Pro
         }
 
         @SuppressWarnings("unchecked")
-        public ExampleProvenance(Map<String,Provenance> provenances) {
-            this.className = ObjectProvenance.checkAndExtractProvenance(provenances,ObjectProvenance.CLASS_NAME,StringProvenance.class,ExampleProvenance.class.getName()).getValue();
+        public ExampleProvenance(Map<String, Provenance> provenances) {
+            this.className = ObjectProvenance.checkAndExtractProvenance(provenances,ObjectProvenance.CLASS_NAME,StringProvenance.class,ExampleProvenance.class.getName()).value();
             this.map = ObjectProvenance.checkAndExtractProvenance(provenances,MAP,MapProvenance.class,ExampleProvenance.class.getName());
             Optional<DoubleProvenance> opt = ObjectProvenance.maybeExtractProvenance(provenances,DOUBLE_FIELD,DoubleProvenance.class,ExampleProvenance.class.getName());
             if (opt.isPresent()) {
@@ -175,8 +174,7 @@ public final class ExampleProvenancableConfigurable implements Configurable, Pro
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof ExampleProvenance)) return false;
-            ExampleProvenance pairs = (ExampleProvenance) o;
+            if (!(o instanceof ExampleProvenance pairs)) return false;
             return className.equals(pairs.className) &&
                     doubleField.equals(pairs.doubleField) &&
                     intArrayField.equals(pairs.intArrayField) &&

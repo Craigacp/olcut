@@ -219,24 +219,12 @@ public class EdnLoader implements ConfigLoader {
                     if(configObj instanceof List<?>) {
                         List<?> configListItem = (List<?>) configObj;
                         switch (checkSymbol(configListItem.get(0))) {
-                            case FILE:
-                                parseFile(rest(configListItem));
-                                break;
-                            case SERIALIZED:
-                                parseSerializedObject(rest(configListItem));
-                                break;
-                            case PROPERTIES:
-                                parseGlobalProperties(rest(configListItem));
-                                break;
-                            case PROPERTY:
-                                parseGlobalProperty(rest(configListItem));
-                                break;
-                            case COMPONENTS:
-                                parseComponents(rest(configListItem));
-                                break;
-                            case COMPONENT:
-                                parseComponent(rest(configListItem));
-                                break;
+                            case FILE -> parseFile(rest(configListItem));
+                            case SERIALIZED -> parseSerializedObject(rest(configListItem));
+                            case PROPERTIES -> parseGlobalProperties(rest(configListItem));
+                            case PROPERTY -> parseGlobalProperty(rest(configListItem));
+                            case COMPONENTS -> parseComponents(rest(configListItem));
+                            case COMPONENT -> parseComponent(rest(configListItem));
                         }
                     }
                 }

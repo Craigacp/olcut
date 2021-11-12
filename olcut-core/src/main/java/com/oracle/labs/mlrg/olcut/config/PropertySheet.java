@@ -483,8 +483,8 @@ public class PropertySheet<T extends Configurable> {
         FieldType genericft = FieldType.getFieldType(genericType);
         if (genericft != null) {
             Map<String,Object> map = new HashMap<>();
-            for (Map.Entry<String, SimpleProperty> e : input.getMap().entrySet()) {
-                String newVal = cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, e.getValue().getValue());
+            for (Map.Entry<String, SimpleProperty> e : input.map().entrySet()) {
+                String newVal = cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, e.getValue().value());
                 map.put(e.getKey(), parseSimpleField(cm, instanceName, fieldName, genericType, genericft, newVal));
             }
             return map;
@@ -501,9 +501,9 @@ public class PropertySheet<T extends Configurable> {
         // from the xml file, so we have to check it.
         List<String> replaced = new ArrayList<>();
         List<Class<?>> removeList = new ArrayList<>();
-        List<Class<?>> classVals = new ArrayList<>(input.getClassList());
-        for (SimpleProperty val : input.getSimpleList()) {
-            replaced.add(cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, val.getValue()));
+        List<Class<?>> classVals = new ArrayList<>(input.classList());
+        for (SimpleProperty val : input.simpleList()) {
+            replaced.add(cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, val.value()));
         }
 
         //
@@ -644,9 +644,9 @@ public class PropertySheet<T extends Configurable> {
         // from the xml file, so we have to check it.
         List<String> replaced = new ArrayList<>();
         List<Class<?>> removeList = new ArrayList<>();
-        List<Class<?>> classVals = new ArrayList<>(input.getClassList());
-        for (SimpleProperty val : input.getSimpleList()) {
-            replaced.add(cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, val.getValue()));
+        List<Class<?>> classVals = new ArrayList<>(input.classList());
+        for (SimpleProperty val : input.simpleList()) {
+            replaced.add(cm.getImmutableGlobalProperties().replaceGlobalProperties(instanceName, fieldName, val.value()));
         }
 
         //
@@ -845,8 +845,7 @@ public class PropertySheet<T extends Configurable> {
 
         Type genericType = f.getGenericType();
 
-        if (genericType instanceof ParameterizedType) {
-            ParameterizedType pt = (ParameterizedType) genericType;
+        if (genericType instanceof ParameterizedType pt) {
             for (Type t : pt.getActualTypeArguments()) {
                 //update the type to the raw type if appropriate
                 if(t instanceof ParameterizedType) {
@@ -938,11 +937,10 @@ public class PropertySheet<T extends Configurable> {
      * expected to be the same.
      */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof PropertySheet)) {
+        if (obj == null || !(obj instanceof PropertySheet ps)) {
             return false;
         }
 
-        PropertySheet ps = (PropertySheet) obj;
         return propValues.equals(ps.propValues);
     }
 

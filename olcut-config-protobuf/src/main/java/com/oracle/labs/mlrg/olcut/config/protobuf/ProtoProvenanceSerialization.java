@@ -289,14 +289,11 @@ public final class ProtoProvenanceSerialization implements ProvenanceSerializati
      * @param fmp The FMP to dispatch on.
      */
     private static int dispatchFMP(RootProvenanceProto.Builder builder, MutableLong counter, FlatMarshalledProvenance fmp) {
-        if (fmp instanceof SimpleMarshalledProvenance) {
-            SimpleMarshalledProvenance smp = (SimpleMarshalledProvenance) fmp;
+        if (fmp instanceof SimpleMarshalledProvenance smp) {
             return encodeSMP(builder,counter,smp);
-        } else if (fmp instanceof ListMarshalledProvenance) {
-            ListMarshalledProvenance lmp = (ListMarshalledProvenance) fmp;
+        } else if (fmp instanceof ListMarshalledProvenance lmp) {
             return encodeLMP(builder,counter,lmp);
-        } else if (fmp instanceof MapMarshalledProvenance) {
-            MapMarshalledProvenance mmp = (MapMarshalledProvenance) fmp;
+        } else if (fmp instanceof MapMarshalledProvenance mmp) {
             return encodeMMP(builder,counter,mmp);
         } else {
             throw new RuntimeException("Should not reach here, unexpected FlatMarshalledProvenance subclass " + fmp.getClass());

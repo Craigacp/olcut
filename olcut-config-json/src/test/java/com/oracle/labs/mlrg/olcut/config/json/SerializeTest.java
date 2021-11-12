@@ -30,7 +30,7 @@ package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertyException;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -78,14 +78,14 @@ public class SerializeTest {
 
     @Test
     public void deserializeComponent() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         StringConfigurable ac = (StringConfigurable) cm.lookup("ac");
         ac.one = "one";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(serPath.toFile()))) {
             oos.writeObject(ac);
         }
-        cm = new ConfigurationManager("stringConfig.json");
+        cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         ac = (StringConfigurable) cm.lookup("ac");
         assertEquals(ac.one, "one");
@@ -99,14 +99,14 @@ public class SerializeTest {
      */
     @Test
     public void deserializeComponentAndReuse() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         StringConfigurable ac = (StringConfigurable) cm.lookup("ac");
         ac.one = "one";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(serPath.toFile()))) {
             oos.writeObject(ac);
         }
-        cm = new ConfigurationManager("stringConfig.json");
+        cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         ac = (StringConfigurable) cm.lookup("ac");
         assertEquals(ac.one, "one");
@@ -123,7 +123,7 @@ public class SerializeTest {
 
     @Test
     public void deserializeObject() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         StringConfigurable ac = (StringConfigurable) cm.lookup("ac");
         ac.one = "one";
@@ -138,7 +138,7 @@ public class SerializeTest {
 
     @Test
     public void deserializeObjectAndReuse() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
         cm.setGlobalProperty("serFile", serPath.toString());
         StringConfigurable ac = (StringConfigurable) cm.lookup("ac");
         ac.one = "one";
@@ -160,7 +160,7 @@ public class SerializeTest {
     @Test
     public void checkBadSerialisedClass() throws IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("stringConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/stringConfig.json");
             cm.setGlobalProperty("serFile", serPath.toString());
             StringConfigurable ac = (StringConfigurable) cm.lookup("ac");
             ac.one = "one";

@@ -100,10 +100,8 @@ class MultiCommandArgumentCompleter implements Completer {
                 CommandInterface ci = command.getValue();
                 logger.log(Level.FINER, "compMap does not yet contain " + lCommand);
                 final Completer[] compToAdd;
-                if (ci instanceof CompleterCommandInterface) {
+                if (ci instanceof CompleterCommandInterface cci) {
                     logger.log(Level.FINER, "Adding custom completer for " + lCommand);
-                    CompleterCommandInterface cci
-                            = (CompleterCommandInterface) ci;
                     compToAdd = cci.getCompleters();
                 } else {
                     compToAdd = null;

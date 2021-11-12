@@ -30,7 +30,6 @@ package com.oracle.labs.mlrg.olcut.provenance.io;
 
 import com.oracle.labs.mlrg.olcut.provenance.ObjectProvenance;
 import com.oracle.labs.mlrg.olcut.provenance.PrimitiveProvenance;
-import com.oracle.labs.mlrg.olcut.provenance.Provenance;
 import com.oracle.labs.mlrg.olcut.provenance.ProvenanceException;
 import com.oracle.labs.mlrg.olcut.provenance.ProvenanceUtil.HashType;
 import com.oracle.labs.mlrg.olcut.provenance.primitives.BooleanProvenance;
@@ -85,7 +84,7 @@ public final class SimpleMarshalledProvenance implements FlatMarshalledProvenanc
      * @param <E> The type of the enum.
      */
     public <E extends Enum> SimpleMarshalledProvenance(EnumProvenance<E> enumProv) {
-        this(enumProv.getKey(), enumProv.getValue().toString(), enumProv.getClass().getName(), false, enumProv.getEnumClass());
+        this(enumProv.key(), enumProv.value().toString(), enumProv.getClass().getName(), false, enumProv.getEnumClass());
     }
 
     /**
@@ -94,7 +93,7 @@ public final class SimpleMarshalledProvenance implements FlatMarshalledProvenanc
      * @param provenance A hash provenance.
      */
     public SimpleMarshalledProvenance(HashProvenance provenance) {
-        this(provenance.getKey(), provenance.getValue(), provenance.getClass().getName(), false, provenance.getType().toString());
+        this(provenance.key(), provenance.value(), provenance.getClass().getName(), false, provenance.type().toString());
     }
 
     /**
@@ -103,7 +102,7 @@ public final class SimpleMarshalledProvenance implements FlatMarshalledProvenanc
      * @param <T> The type of primitive.
      */
     public <T> SimpleMarshalledProvenance(PrimitiveProvenance<T> provenance) {
-        this(provenance.getKey(), provenance.getValue().toString(), provenance.getClass().getName(), false, "");
+        this(provenance.key(), provenance.value().toString(), provenance.getClass().getName(), false, "");
     }
 
     /**
@@ -253,8 +252,7 @@ public final class SimpleMarshalledProvenance implements FlatMarshalledProvenanc
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SimpleMarshalledProvenance)) return false;
-        SimpleMarshalledProvenance that = (SimpleMarshalledProvenance) o;
+        if (!(o instanceof SimpleMarshalledProvenance that)) return false;
         return isReference == that.isReference &&
                 key.equals(that.key) &&
                 value.equals(that.value) &&

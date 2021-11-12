@@ -38,10 +38,7 @@ import java.util.Objects;
 /**
  * Provenance for a list of provenance objects.
  */
-public final class ListProvenance<T extends Provenance> implements Provenance, Iterable<T> {
-    private static final long serialVersionUID = 1L;
-
-    private final List<T> list;
+public final record ListProvenance<T extends Provenance>(List<T> list) implements Provenance, Iterable<T> {
 
     /**
      * Creates a ListProvenance from the supplied list. The
@@ -49,45 +46,19 @@ public final class ListProvenance<T extends Provenance> implements Provenance, I
      * @param list The input list.
      */
     public ListProvenance(List<T> list) {
-        this.list = Collections.unmodifiableList(new ArrayList<>(list));
+        this.list = List.copyOf(list);
     }
 
     /**
      * Creates an empty list provenance of the appropriate type.
      */
     public ListProvenance() {
-        this.list = Collections.emptyList();
-    }
-
-    /**
-     * An unmodifiable view on the provenance list.
-     * @return The provenance list.
-     */
-    public List<T> getList() {
-        return list;
+        this(Collections.emptyList());
     }
 
     @Override
     public Iterator<T> iterator() {
         return list.iterator();
-    }
-
-    @Override
-    public String toString() {
-        return list.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ListProvenance)) return false;
-        ListProvenance<?> that = (ListProvenance<?>) o;
-        return list.equals(that.list);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(list);
     }
 
     /**

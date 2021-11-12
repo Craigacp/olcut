@@ -129,7 +129,7 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
     protected SkeletalConfiguredObjectProvenance(ExtractedInfo info) {
         this.className = info.className;
         this.hostShortName = info.hostShortName;
-        this.configuredParameters = Collections.unmodifiableMap(new HashMap<>(info.configuredParameters));
+        this.configuredParameters = Map.copyOf(info.configuredParameters);
     }
 
     /**
@@ -208,47 +208,15 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
                         logger.log(Level.SEVERE, "Provenance and configuration not supported for field '" + f.getName() + "' of type '" + f.getType() + ", value not recorded.");
                     } else {
                         switch (ft) {
-                            case BOOLEAN:
-                            case BYTE:
-                            case CHAR:
-                            case SHORT:
-                            case INTEGER:
-                            case LONG:
-                            case FLOAT:
-                            case DOUBLE:
-                            case STRING:
-                            case FILE:
-                            case PATH:
-                            case URL:
-                            case DATE_TIME:
-                            case DATE:
-                            case TIME:
-                            case ENUM:
-                            case CONFIGURABLE:
-                            case ATOMIC_INTEGER:
-                            case ATOMIC_LONG:
+                            case BOOLEAN, BYTE, CHAR, SHORT, INTEGER, LONG, FLOAT, DOUBLE, STRING, FILE, PATH, URL, DATE_TIME, DATE, TIME, ENUM, CONFIGURABLE, ATOMIC_INTEGER, ATOMIC_LONG -> {
                                 Optional<Provenance> opt = convertPrimitive(ft, f.getType(), f.getName(), f.get(host));
                                 if (opt.isPresent()) {
                                     map.put(f.getName(), opt.get());
                                 }
-                                break;
-                            case BYTE_ARRAY:
-                            case CHAR_ARRAY:
-                            case SHORT_ARRAY:
-                            case INTEGER_ARRAY:
-                            case LONG_ARRAY:
-                            case FLOAT_ARRAY:
-                            case DOUBLE_ARRAY:
-                            case BOOLEAN_ARRAY:
-                                map.put(f.getName(), convertPrimitiveArray(ft, f, f.get(host)));
-                                break;
-                            case STRING_ARRAY:
-                            case CONFIGURABLE_ARRAY:
-                                map.put(f.getName(), convertObjectArray(ft, f, (Object[]) f.get(host)));
-                                break;
-                            case LIST:
-                            case ENUM_SET:
-                            case SET: {
+                            }
+                            case BYTE_ARRAY, CHAR_ARRAY, SHORT_ARRAY, INTEGER_ARRAY, LONG_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, BOOLEAN_ARRAY -> map.put(f.getName(), convertPrimitiveArray(ft, f, f.get(host)));
+                            case STRING_ARRAY, CONFIGURABLE_ARRAY -> map.put(f.getName(), convertObjectArray(ft, f, (Object[]) f.get(host)));
+                            case LIST, ENUM_SET, SET -> {
                                 List<Class<?>> genericClasses = PropertySheet.getGenericClass(f);
                                 if (genericClasses.size() != 1) {
                                     logger.log(Level.SEVERE, "Invalid configurable field definition, field not recorded - found too many or too few generic type parameters for field " + f.getName());
@@ -257,7 +225,7 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
                                 }
                                 break;
                             }
-                            case MAP: {
+                            case MAP -> {
                                 List<Class<?>> genericClasses = PropertySheet.getGenericClass(f);
                                 if (genericClasses.size() != 2) {
                                     logger.log(Level.SEVERE, "Invalid configurable field definition, field not recorded - found too many or too few generic type parameters for field " + f.getName());
@@ -266,10 +234,7 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
                                 }
                                 break;
                             }
-                            case RANDOM:
-                            default:
-                                logger.log(Level.SEVERE, "Automatic provenance not supported for field type " + ft + ", field '" + f.getName() + "' not recorded.");
-                                break;
+                            default -> logger.log(Level.SEVERE, "Automatic provenance not supported for field type " + ft + ", field '" + f.getName() + "' not recorded.");
                         }
                     }
                 }
@@ -298,65 +263,58 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
         String fieldName = f.getName();
         ArrayList<PrimitiveProvenance> list = new ArrayList<>();
         switch (ft) {
-            case BYTE_ARRAY: {
+            case BYTE_ARRAY -> {
                 byte[] array = (byte[]) object;
                 for (byte e : array) {
-                    list.add(new ByteProvenance(fieldName,e));
+                    list.add(new ByteProvenance(fieldName, e));
                 }
-                break;
             }
-            case CHAR_ARRAY:{
+            case CHAR_ARRAY -> {
                 char[] array = (char[]) object;
                 for (char e : array) {
-                    list.add(new CharProvenance(fieldName,e));
+                    list.add(new CharProvenance(fieldName, e));
                 }
-                break;
             }
-            case SHORT_ARRAY:{
+            case SHORT_ARRAY -> {
                 short[] array = (short[]) object;
                 for (short e : array) {
-                    list.add(new ShortProvenance(fieldName,e));
+                    list.add(new ShortProvenance(fieldName, e));
                 }
-                break;
             }
-            case INTEGER_ARRAY:{
+            case INTEGER_ARRAY -> {
                 int[] array = (int[]) object;
                 for (int e : array) {
-                    list.add(new IntProvenance(fieldName,e));
+                    list.add(new IntProvenance(fieldName, e));
                 }
-                break;
             }
-            case LONG_ARRAY:{
+            case LONG_ARRAY -> {
                 long[] array = (long[]) object;
                 for (long e : array) {
-                    list.add(new LongProvenance(fieldName,e));
+                    list.add(new LongProvenance(fieldName, e));
                 }
-                break;
             }
-            case FLOAT_ARRAY:{
+            case FLOAT_ARRAY -> {
                 float[] array = (float[]) object;
                 for (float e : array) {
-                    list.add(new FloatProvenance(fieldName,e));
+                    list.add(new FloatProvenance(fieldName, e));
                 }
-                break;
             }
-            case DOUBLE_ARRAY:{
+            case DOUBLE_ARRAY -> {
                 double[] array = (double[]) object;
                 for (double e : array) {
-                    list.add(new DoubleProvenance(fieldName,e));
+                    list.add(new DoubleProvenance(fieldName, e));
                 }
-                break;
             }
-            case BOOLEAN_ARRAY:{
+            case BOOLEAN_ARRAY -> {
                 boolean[] array = (boolean[]) object;
                 for (boolean e : array) {
-                    list.add(new BooleanProvenance(fieldName,e));
+                    list.add(new BooleanProvenance(fieldName, e));
                 }
-                break;
             }
-            default:
+            default -> {
                 logger.log(Level.SEVERE, "Automatic provenance not supported for field type " + ft + ", field '" + f.getName() + "' not recorded.");
                 return new ListProvenance<>();
+            }
         }
         return new ListProvenance<>(list);
     }
@@ -373,32 +331,34 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
             return new ListProvenance<>();
         }
         String fieldName = f.getName();
-        switch (ft) {
-            case STRING_ARRAY:
+        return switch (ft) {
+            case STRING_ARRAY -> {
                 List<StringProvenance> sp = new ArrayList<>();
                 for (Object o : array) {
                     String s = (String) o;
-                    sp.add(new StringProvenance(fieldName,s));
+                    sp.add(new StringProvenance(fieldName, s));
                 }
-                return new ListProvenance<>(sp);
-            case CONFIGURABLE_ARRAY:
+                yield new ListProvenance<>(sp);
+            }
+            case CONFIGURABLE_ARRAY -> {
                 List<Provenance> lp = new ArrayList<>();
                 for (Object o : array) {
                     if (o == null) {
                         lp.add(ConfiguredObjectProvenance.getEmptyProvenance(f.getType().getComponentType().getName()));
-                    } else if (o instanceof Provenancable) {
-                        Provenancable<?> p = (Provenancable<?>) o;
+                    } else if (o instanceof Provenancable<?> p) {
                         lp.add(p.getProvenance());
                     } else {
                         logger.log(Level.WARNING, "Automatic provenance generated for Configurable class, consider opting into provenance by implementing Provenancable on " + o.getClass().toString());
-                        lp.add(new ConfiguredObjectProvenanceImpl((Configurable)o, fieldName));
+                        lp.add(new ConfiguredObjectProvenanceImpl((Configurable) o, fieldName));
                     }
                 }
-                return new ListProvenance<>(lp);
-            default:
+                yield new ListProvenance<>(lp);
+            }
+            default -> {
                 logger.log(Level.SEVERE, "Automatic provenance not supported for field type " + ft + ", field '" + f.getName() + "' not recorded.");
-                return new ListProvenance<>();
-        }
+                yield new ListProvenance<>();
+            }
+        };
     }
 
     /**
@@ -605,8 +565,7 @@ public abstract class SkeletalConfiguredObjectProvenance implements ConfiguredOb
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SkeletalConfiguredObjectProvenance)) return false;
-        SkeletalConfiguredObjectProvenance pairs = (SkeletalConfiguredObjectProvenance) o;
+        if (!(o instanceof SkeletalConfiguredObjectProvenance pairs)) return false;
         return className.equals(pairs.className) &&
                 hostShortName.equals(pairs.hostShortName) &&
                 configuredParameters.equals(pairs.configuredParameters);

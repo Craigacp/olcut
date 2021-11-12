@@ -28,7 +28,7 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.AllFieldsConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.AllFieldsConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 
 import java.io.File;
@@ -67,14 +67,14 @@ public class AllFieldsConfiguredTest {
 
     @Test
     public void loadConfig() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("allConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/allConfig.json");
         AllFieldsConfigurable ac = (AllFieldsConfigurable) cm.lookup("all-config");
         assertNotNull(ac, "Failed to load all-config");
     }
 
     @Test
     public void saveConfig() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("allConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/allConfig.json");
         AllFieldsConfigurable ac1 = (AllFieldsConfigurable) cm1.lookup("all-config");
         cm1.save(f, true);
         ConfigurationManager cm2 = new ConfigurationManager(replaceBackSlashes(f.toString()));

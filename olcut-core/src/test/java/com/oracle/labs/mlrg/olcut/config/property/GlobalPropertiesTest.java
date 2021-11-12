@@ -1,5 +1,6 @@
 package com.oracle.labs.mlrg.olcut.config.property;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
@@ -20,6 +21,6 @@ public class GlobalPropertiesTest {
         gp.importProperties(sysProps);
         assertNull(gp.get("this property has spaces spaces are bad"));
         assertNull(gp.get("this property has weird punctuation !@#$%^&&*"));
-        assertEquals(new GlobalProperty("also-a-value"),gp.get("this.property.conforms.to.the.global.props.regex"));
+        Assertions.assertEquals(new GlobalProperty("also-a-value"),gp.get("this.property.conforms.to.the.global.props.regex"));
     }
 }

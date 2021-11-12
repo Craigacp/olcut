@@ -37,7 +37,7 @@ public class StandardCommandTest {
     }
 
     @BeforeEach
-    public  void setupEach() {
+    public void setupEach() {
         //
         // Start with a fresh command interpreter and bury and output
         ci = new CommandInterpreter(false);
@@ -50,7 +50,7 @@ public class StandardCommandTest {
 
     @Nested
     @DisplayName("Shell LogLevel Tests")
-    class LogLevelTests {
+    public class LogLevelTests {
         @BeforeEach
         public void cleanLoggers() throws IOException {
             // Outer class's BeforeEach runs before this one

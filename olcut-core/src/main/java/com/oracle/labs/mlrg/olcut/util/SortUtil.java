@@ -146,16 +146,7 @@ public final class SortUtil {
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
-    private static class SortIntegerTuple implements Comparable<SortIntegerTuple> {
-        private final boolean ascending;
-        public final int value;
-        public final int index;
-
-        public SortIntegerTuple(boolean ascending, int value, int index) {
-            this.ascending = ascending;
-            this.value = value;
-            this.index = index;
-        }
+    private record SortIntegerTuple(boolean ascending, int value, int index) implements Comparable<SortIntegerTuple> {
 
         @Override
         public int compareTo(SortIntegerTuple o) {
@@ -225,16 +216,7 @@ public final class SortUtil {
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
-    private static class SortDoubleTuple implements Comparable<SortDoubleTuple> {
-        private final boolean ascending;
-        public final double value;
-        public final int index;
-
-        public SortDoubleTuple(boolean ascending, double value, int index) {
-            this.ascending = ascending;
-            this.value = value;
-            this.index = index;
-        }
+    private record SortDoubleTuple(boolean ascending, double value, int index) implements Comparable<SortDoubleTuple> {
 
         @Override
         public int compareTo(SortDoubleTuple o) {
@@ -352,16 +334,8 @@ public final class SortUtil {
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
-    private static class SortTuple<T extends Comparable<T>> implements Comparable<SortTuple<T>> {
-        private final boolean ascending;
-        public final T value;
-        public final int index;
-
-        public SortTuple(boolean ascending, T value, int index) {
-            this.ascending = ascending;
-            this.value = value;
-            this.index = index;
-        }
+    private record SortTuple<T extends Comparable<T>>(boolean ascending, T value,
+                                                      int index) implements Comparable<SortTuple<T>> {
 
         @Override
         public int compareTo(SortTuple<T> o) {

@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.PathConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.PathConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,7 +50,7 @@ public class PathTest {
 
     @Test
     public void test() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("pathConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/pathConfig.json");
         PathConfigurable pc = (PathConfigurable) cm.lookup(
                 "pathTest");
         String actualPath = pc.getPath().toString();

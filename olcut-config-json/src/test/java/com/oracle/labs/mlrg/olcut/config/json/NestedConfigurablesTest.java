@@ -29,8 +29,8 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.FooConfigurable;
-import com.oracle.labs.mlrg.olcut.config.FooUserConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.FooConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.FooUserConfigurable;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class NestedConfigurablesTest {
 
     @Test
     public void testLoadFromXML() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("nestedConfigurablesConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/nestedConfigurablesConfig.json");
         FooUserConfigurable user = (FooUserConfigurable) cm.lookup("user");
         assertNotNull(user);
         FooConfigurable foo = user.getFoo();
@@ -66,7 +66,7 @@ public class NestedConfigurablesTest {
 
     @Test
     public void testSave() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("nestedConfigurablesConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/nestedConfigurablesConfig.json");
         FooUserConfigurable u1 = (FooUserConfigurable) cm1.lookup("user");
         File tmp = mkTmp();
         cm1.save(tmp);

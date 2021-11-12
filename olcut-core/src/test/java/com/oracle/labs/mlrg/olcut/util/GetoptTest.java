@@ -60,24 +60,12 @@ public class GetoptTest {
         int c;
         while ((c = getopt.getopt()) != -1) {
             switch (c) {
-                case 'a':
-                    assertNull(getopt.optArg, "Found an argument for option a");
-                    break;
-                case 'b':
-                    assertNull(getopt.optArg, "Found an argument for option b");
-                    break;
-                case 'c':
-                    assertEquals("carg", getopt.optArg.toLowerCase(), "Found incorrect argument for option c");
-                    break;
-                case 'x':
-                    assertNull(getopt.optArg, "Found an argument for option x");
-                    break;
-                case 'y':
-                    assertNull(getopt.optArg, "Found an argument for option y");
-                    break;
-                default:
-                    fail("Found an unknown argument - " + c);
-
+                case 'a' -> assertNull(getopt.optArg, "Found an argument for option a");
+                case 'b' -> assertNull(getopt.optArg, "Found an argument for option b");
+                case 'c' -> assertEquals("carg", getopt.optArg.toLowerCase(), "Found incorrect argument for option c");
+                case 'x' -> assertNull(getopt.optArg, "Found an argument for option x");
+                case 'y' -> assertNull(getopt.optArg, "Found an argument for option y");
+                default -> fail("Found an unknown argument - " + c);
             }
         }
         assertEquals( 6, getopt.optInd, "Found incorrect number of arguments");
@@ -92,23 +80,12 @@ public class GetoptTest {
         getopt.optInd = 0;
         while ((c = getopt.getopt()) != -1) {
             switch (c) {
-                case 'a':
-                    assertNull(getopt.optArg, "Found an argument for option a");
-                    break;
-                case 'b':
-                    assertNull(getopt.optArg, "Found an argument for option b");
-                    break;
-                case 'c':
-                    fail("No argument c in input");
-                    break;
-                case 'x':
-                    fail("No argument x in input");
-                    break;
-                case 'y':
-                    fail("No argument y in input");
-                    break;
-                default:
-                    fail("Found an unknown argument - " + c);
+                case 'a' -> assertNull(getopt.optArg, "Found an argument for option a");
+                case 'b' -> assertNull(getopt.optArg, "Found an argument for option b");
+                case 'c' -> fail("No argument c in input");
+                case 'x' -> fail("No argument x in input");
+                case 'y' -> fail("No argument y in input");
+                default -> fail("Found an unknown argument - " + c);
             }
         }
         assertEquals(1, getopt.optInd, "Found incorrect number of arguments");

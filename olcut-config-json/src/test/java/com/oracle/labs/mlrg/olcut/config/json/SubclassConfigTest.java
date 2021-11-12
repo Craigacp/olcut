@@ -29,7 +29,7 @@
 package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.StringleConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringleConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,7 +50,7 @@ public class SubclassConfigTest {
 
     @Test
     public void testStringConfigSubclass() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("subclassConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/subclassConfig.json");
         StringleConfigurable scc = (StringleConfigurable) cm.lookup(
                 "stringConfigSubclass");
         assertEquals("a", scc.one);

@@ -30,7 +30,7 @@ package com.oracle.labs.mlrg.olcut.config.json;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertyException;
-import com.oracle.labs.mlrg.olcut.config.SimpleConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.SimpleConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -57,7 +57,7 @@ public class PropertyExceptionTest {
     @Test
     public void unknownPropertyException() throws PropertyException, IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("undefinedPropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/undefinedPropertyConfig.json");
             SimpleConfigurable sc = (SimpleConfigurable) cm.lookup("simple");
         });
     }
@@ -65,7 +65,7 @@ public class PropertyExceptionTest {
     @Test
     public void unknownPropertyWithKnownPropertyException() throws PropertyException, IOException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("undefinedPropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/undefinedPropertyConfig.json");
             SimpleConfigurable sc = (SimpleConfigurable) cm.lookup("simple2");
         });
     }

@@ -30,6 +30,9 @@ package com.oracle.labs.mlrg.olcut.config;
 
 
 import java.io.IOException;
+
+import com.oracle.labs.mlrg.olcut.config.test.ArrayConfigurable;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -53,7 +56,7 @@ public class ArrayTest {
 
     @Test
     public void invalidArrayTest() throws IOException {
-        assertThrows(PropertyException.class, () -> {
+        Assertions.assertThrows(PropertyException.class, () -> {
             ConfigurationManager cm = new ConfigurationManager("arrayConfig.xml");
             ArrayConfigurable ac = (ArrayConfigurable) cm.lookup("invalid-char");
         }, "Invalid character array parsed, should have thrown PropertyException.");

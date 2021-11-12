@@ -31,12 +31,12 @@ package com.oracle.labs.mlrg.olcut.config.json;
 import com.oracle.labs.mlrg.olcut.config.io.ConfigLoaderException;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertyException;
-import com.oracle.labs.mlrg.olcut.config.StringConfigurable;
-import com.oracle.labs.mlrg.olcut.config.StringListConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringConfigurable;
+import com.oracle.labs.mlrg.olcut.config.test.StringListConfigurable;
 import com.oracle.labs.mlrg.olcut.util.Util;
 
 import java.io.IOException;
-import org.junit.jupiter.api.AfterAll;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +57,7 @@ public class GlobalPropertyTest {
     @Test
     public void noProperty() throws IOException, PropertyException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
             StringConfigurable sc = (StringConfigurable) cm.lookup("unknown");
         });
     }
@@ -65,7 +65,7 @@ public class GlobalPropertyTest {
     @Test
     public void badlyFormed() throws IOException, PropertyException {
         assertThrows(PropertyException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
             StringConfigurable sc = (StringConfigurable) cm.lookup("badlyformed");
         });
     }
@@ -73,13 +73,13 @@ public class GlobalPropertyTest {
     @Test
     public void invalidGlobalProperty() {
         assertThrows(ConfigLoaderException.class, () -> {
-            ConfigurationManager cm = new ConfigurationManager("invalidGlobalPropertyConfig.json");
+            ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/invalidGlobalPropertyConfig.json");
         });
     }
 
     @Test
     public void simpleReplacement() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("simple");
         assertEquals(sc.one, "alpha");
         assertEquals(sc.two, "beta");
@@ -88,7 +88,7 @@ public class GlobalPropertyTest {
 
     @Test
     public void compoundReplacement() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("compound");
         assertEquals(sc.one, "alpha/beta");
         assertEquals(sc.two, "betacharlie");
@@ -97,7 +97,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void nonGlobals() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("nonglobal");
         assertEquals(sc.one, "${a");
         assertEquals(sc.two, "$b}");
@@ -106,7 +106,7 @@ public class GlobalPropertyTest {
 
     @Test
     public void recurse() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("recurse");
         assertEquals(sc.one, "alpha");
         assertEquals(sc.two, "alpha");
@@ -115,7 +115,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void recurse2() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("recurse2");
         assertEquals("alpha/bar", sc.one);
         assertEquals(sc.two, "x");
@@ -124,7 +124,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void recurse3() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("recurse3");
         assertEquals("/tmp/alpha", sc.one);
         assertEquals(sc.two, "/tmp/alpha/bpath");
@@ -134,7 +134,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void compoundRecurse() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("compoundrecurse");
         assertEquals(sc.one, "one beta/alpha");
         assertEquals(sc.two, "two charlie/alpha/beta/alpha");
@@ -143,7 +143,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void distinguishedProps() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringConfigurable sc = (StringConfigurable) cm.lookup("distinguished");
         assertEquals(Util.getHostName(), sc.one);
         assertEquals(System.getProperty("user.name"), sc.two);
@@ -151,7 +151,7 @@ public class GlobalPropertyTest {
     
     @Test
     public void stringList() throws IOException {
-        ConfigurationManager cm = new ConfigurationManager("globalPropertyConfig.json");
+        ConfigurationManager cm = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/globalPropertyConfig.json");
         StringListConfigurable slc = (StringListConfigurable) cm.lookup("listTest");
         assertEquals("alpha", slc.strings.get(0));
         assertEquals("beta", slc.strings.get(1));
