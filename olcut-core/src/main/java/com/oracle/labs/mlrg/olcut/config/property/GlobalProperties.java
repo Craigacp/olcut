@@ -73,7 +73,7 @@ public class GlobalProperties extends ImmutableGlobalProperties {
      * @param props The properties to import.
      */
     // Exposed for unit testing
-    void importProperties(Properties props) {
+    public void importProperties(Properties props) {
         for (Map.Entry<Object,Object> e : props.entrySet()) {
             // These two calls use .toString rather than a cast
             // because sometimes people insert Integers into the system properties.

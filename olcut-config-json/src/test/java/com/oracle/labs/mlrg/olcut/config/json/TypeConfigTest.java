@@ -28,10 +28,10 @@
 
 package com.oracle.labs.mlrg.olcut.config.json;
 
-import com.oracle.labs.mlrg.olcut.config.test.BasicConfigurable;
+import com.oracle.labs.mlrg.olcut.test.config.BasicConfigurable;
 import com.oracle.labs.mlrg.olcut.config.Configurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
-import com.oracle.labs.mlrg.olcut.config.test.ListTypeConfigurable;
+import com.oracle.labs.mlrg.olcut.test.config.ListTypeConfigurable;
 
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,7 +44,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * A test for using the @Config annotation.
  */
 public class TypeConfigTest {
-    
+    public static String configPath() {
+        return TypeConfigTest.class.getName() + "|typeConfig.json";
+    }
+
     @BeforeAll
     public static void setUpClass() throws IOException {
         ConfigurationManager.addFileFormatFactory(new JsonConfigFactory());
@@ -52,7 +55,7 @@ public class TypeConfigTest {
 
     @Test
     public void defaultValues() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager(configPath());
         BasicConfigurable bc1 = (BasicConfigurable) cm1.lookup("default");
         assertEquals(bc1.s, "default");
         assertEquals(bc1.i, 16);
@@ -65,7 +68,7 @@ public class TypeConfigTest {
 
     @Test
     public void configuredTypes() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager(configPath());
         BasicConfigurable bc1 = (BasicConfigurable) cm1.lookup("a");
         assertEquals(bc1.s, "one");
         assertEquals(bc1.i, 2);
@@ -78,7 +81,7 @@ public class TypeConfigTest {
     
     @Test
     public void listTypes() throws IOException {
-        ConfigurationManager cm1 = new ConfigurationManager("/com/oracle/labs/mlrg/olcut/config/json/typeConfig.json");
+        ConfigurationManager cm1 = new ConfigurationManager(configPath());
         ListTypeConfigurable lc1 = (ListTypeConfigurable) cm1.lookup("l1");
         Configurable[] cl = lc1.getList();
         BasicConfigurable bc1 = (BasicConfigurable) cl[0];

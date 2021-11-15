@@ -1268,7 +1268,7 @@ public class CommandInterpreter extends Thread {
     /**
      * Default commands added to all command shells.
      */
-    class StandardCommands implements CommandGroup {
+    public final class StandardCommands implements CommandGroup {
 
         @Command(usage = "lists available commands")
         public String help(CommandInterpreter ci) {

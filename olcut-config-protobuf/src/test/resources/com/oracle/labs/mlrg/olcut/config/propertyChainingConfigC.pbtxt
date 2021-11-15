@@ -16,7 +16,7 @@ properties {
 }
 components {
   name: "configC"
-  type: "com.oracle.labs.mlrg.olcut.config.test.StringConfigurable"
+  type: "com.oracle.labs.mlrg.olcut.test.config.StringConfigurable"
   properties {
     key: "one"
     value: "fileC"

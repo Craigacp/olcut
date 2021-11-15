@@ -28,6 +28,8 @@
 
 package com.oracle.labs.mlrg.olcut.util;
 
+import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -594,8 +596,23 @@ public final class IOUtil {
      * any.
      */
     public static URL getURLForLocation(String location) {
+        // Check if we need to finesse the location by looking it up from a different module
+        int modIndex = location.indexOf(ConfigurationManager.MODULE_SEPARATOR_CHAR);
+        if (modIndex > 0) {
+            try {
+                String witnessClassName = location.substring(0, modIndex);
+                String classPathName = location.substring(modIndex + 1);
+                Class<?> witnessClass = Class.forName(witnessClassName);
+                URL url = witnessClass.getResource(classPathName);
+                if (url != null) {
+                    return url;
+                } // else fall through to regular loading
+            } catch (ClassNotFoundException e) {
+                // fall through to regular loading
+            }
+        }
         //
-        // First, see if it's a resource on our classpath.
+        // Next, see if it's a resource on our classpath.
         URL ret = IOUtil.class.getResource(location);
         if (ret == null) {
             try {

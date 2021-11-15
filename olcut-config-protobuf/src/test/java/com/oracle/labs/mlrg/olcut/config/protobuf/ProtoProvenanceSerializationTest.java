@@ -30,11 +30,11 @@ package com.oracle.labs.mlrg.olcut.config.protobuf;
 
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.protobuf.protos.RootProvenanceProto;
-import com.oracle.labs.mlrg.olcut.provenance.ExampleProvenancableConfigurable;
+import com.oracle.labs.mlrg.olcut.test.provenance.ExampleProvenancableConfigurable;
 import com.oracle.labs.mlrg.olcut.provenance.ListProvenance;
 import com.oracle.labs.mlrg.olcut.provenance.ObjectProvenance;
 import com.oracle.labs.mlrg.olcut.provenance.Provenance;
-import com.oracle.labs.mlrg.olcut.provenance.ProvenanceConversionTest.SimpleObjectProvenance;
+import com.oracle.labs.mlrg.olcut.test.provenance.ProvenanceConversionTest.SimpleObjectProvenance;
 import com.oracle.labs.mlrg.olcut.provenance.ProvenanceUtil;
 import com.oracle.labs.mlrg.olcut.provenance.io.ObjectMarshalledProvenance;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +46,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.SplittableRandom;
 
-import static com.oracle.labs.mlrg.olcut.provenance.ProvenanceConversionTest.constructProvenance;
+import static com.oracle.labs.mlrg.olcut.test.provenance.ProvenanceConversionTest.constructProvenance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

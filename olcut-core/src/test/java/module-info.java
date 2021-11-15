@@ -1,4 +1,4 @@
-module com.oracle.labs.mlrg.olcut.core {
+module com.oracle.labs.mlrg.olcut.core.test {
     requires java.base;
     requires java.logging;
     requires java.management;
@@ -10,21 +10,20 @@ module com.oracle.labs.mlrg.olcut.core {
     requires org.jline.terminal;
     requires org.jline.terminal.jansi;
 
-    exports com.oracle.labs.mlrg.olcut.command;
-    exports com.oracle.labs.mlrg.olcut.config;
-    exports com.oracle.labs.mlrg.olcut.config.io;
-    exports com.oracle.labs.mlrg.olcut.config.property;
-    exports com.oracle.labs.mlrg.olcut.config.xml;
-    exports com.oracle.labs.mlrg.olcut.provenance;
-    exports com.oracle.labs.mlrg.olcut.provenance.io;
-    exports com.oracle.labs.mlrg.olcut.provenance.impl;
-    exports com.oracle.labs.mlrg.olcut.provenance.primitives;
-    exports com.oracle.labs.mlrg.olcut.util;
-    exports com.oracle.labs.mlrg.olcut.config.test;
+    requires com.oracle.labs.mlrg.olcut.core;
+
+    exports com.oracle.labs.mlrg.olcut.test.config;
+    exports com.oracle.labs.mlrg.olcut.test.config.test;
+    exports com.oracle.labs.mlrg.olcut.test.config.property;
+    exports com.oracle.labs.mlrg.olcut.test.command;
+    exports com.oracle.labs.mlrg.olcut.test.provenance;
+    exports com.oracle.labs.mlrg.olcut.test.util;
 
     requires org.junit.jupiter.api;
     requires org.junit.jupiter.engine;
     requires org.junit.platform.commons;
 
-    opens com.oracle.labs.mlrg.olcut.command to org.junit.platform.commons;
+    opens com.oracle.labs.mlrg.olcut.test.config to com.oracle.labs.mlrg.olcut.core;
+    opens com.oracle.labs.mlrg.olcut.test.provenance to com.oracle.labs.mlrg.olcut.core;
+    opens com.oracle.labs.mlrg.olcut.test.util to com.oracle.labs.mlrg.olcut.core;
 }

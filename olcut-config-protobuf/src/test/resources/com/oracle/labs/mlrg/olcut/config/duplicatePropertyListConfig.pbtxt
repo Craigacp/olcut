@@ -1,6 +1,6 @@
 component {
   name: "a"
-  type: "com.oracle.labs.mlrg.olcut.config.test.ArrayConfigurable"
+  type: "com.oracle.labs.mlrg.olcut.test.config.ArrayConfigurable"
   list_property {
     name: "floatArray"
     item: "1.1f"

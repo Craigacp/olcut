@@ -21,5 +21,5 @@ module com.oracle.labs.mlrg.olcut.core {
     exports com.oracle.labs.mlrg.olcut.provenance.primitives;
     exports com.oracle.labs.mlrg.olcut.util;
 
-    exports com.oracle.labs.mlrg.olcut.config.test;
+    opens com.oracle.labs.mlrg.olcut.command to com.oracle.labs.mlrg.olcut.core.test;
 }

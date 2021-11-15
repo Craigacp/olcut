@@ -28,7 +28,7 @@
 
 package com.oracle.labs.mlrg.olcut.config.protobuf;
 
-import com.oracle.labs.mlrg.olcut.config.test.AllFieldsConfigurable;
+import com.oracle.labs.mlrg.olcut.test.config.AllFieldsConfigurable;
 import com.oracle.labs.mlrg.olcut.config.ConfigurationManager;
 import com.oracle.labs.mlrg.olcut.config.PropertySheet;
 import org.junit.jupiter.api.BeforeAll;
@@ -94,7 +94,7 @@ public class AllFieldsConfiguredTest {
 
     @Test
     public void generateConfig() throws IOException {
-        AllFieldsConfigurable ac = com.oracle.labs.mlrg.olcut.config.AllFieldsConfiguredTest.generateConfigurable();
+        AllFieldsConfigurable ac = AllFieldsConfigurable.generateConfigurable();
         ConfigurationManager cm1 = new ConfigurationManager();
         cm1.importConfigurable(ac,"all-config");
         cm1.save(binaryFile);
