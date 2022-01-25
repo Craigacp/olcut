@@ -142,7 +142,7 @@ public final class SortUtil {
     }
 
     /**
-     * A tuple of two ints and a boolean. It wants to be a record. Or a value type.
+     * A tuple of two ints and a boolean. It wants to be a value type.
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
@@ -212,7 +212,7 @@ public final class SortUtil {
     }
 
     /**
-     * A tuple of an int, a double and a boolean. It wants to be a record. Or a value type.
+     * A tuple of an int, a double and a boolean. It wants to be a value type.
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
@@ -330,7 +330,7 @@ public final class SortUtil {
     }
 
     /**
-     * A tuple of an int, a T and a boolean. It wants to be a record. Or a value type.
+     * A tuple of an int, a T and a boolean. It wants to be a value type.
      * <p>
      * Used to provide something comparable for {@link SortUtil#argsort}.
      */
